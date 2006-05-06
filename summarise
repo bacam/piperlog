@@ -1,0 +1,17 @@
+^PAM_unix\[[0-9]+\]: authentication failure; (\(uid=[0-9]+\)) -> (\S+) for ssh service
+
+^sshd\[[0-9]+\]: Failed password for \S+ from ([0-9.]+) port [0-9]+ ssh2$
+^sshd\[[0-9]+\]: pam_ldap: error trying to bind as user "(.+)" \(Invalid credentials\)$
+^sshd\[[0-9]+\]: \(pam_unix\) check pass; user unknown
+^sshd\[[0-9]+\]: \(pam_unix\) authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=(.+)$
+^sshd\[[0-9]+\]: error: PAM: Authentication service cannot retrieve authentication info\. for .+ from (.+)$
+^sshd\[[0-9]+\]: Illegal user .+ from (.+)$
+^sshd\[[0-9]+\]: reverse mapping checking getaddrinfo for (.+) failed - POSSIBLE BREAKIN ATTEMPT!$
+
+
+^postfix/smtp\[[0-9]+\]: connect to (.+): Connection timed out \(port 25\)$
+^postfix/smtpd\[[0-9]+\]: warning: smtpd_peer_init: (.+) verification failed: Name or service not known$
+
+^getty\[[0-9]+\]: (/dev/tty.+): cannot open as standard input: No such device$
+
+
