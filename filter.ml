@@ -97,7 +97,13 @@ let filter ignorable outbuffer summaries s =
 ;;
 
 let readregexps filename =
-  File.foldfile filename (fun a l -> (Pcre.regexp l)::a) []
+  let addregexp a l =
+    try (Pcre.regexp l)::a
+    with Pcre.BadPattern (msg,pos) ->
+      Printf.eprintf "Bad regexp: %s at position %d\n  %s\n%!" msg pos l;
+      a
+  in
+  File.foldfile filename addregexp []
 ;;
 
 (* Might be more efficient if stored (and updated) a list in the hash table,
@@ -109,7 +115,10 @@ let mkignore filename =
     let service = 
       try (Pcre.extract ~rex:grabservice ~full_match:false l).(0)
       with Not_found -> ""
-    in (Hashtbl.add a service (Pcre.regexp l); a)
+    in try (Hashtbl.add a service (Pcre.regexp l); a)
+       with Pcre.BadPattern (msg,pos) ->
+         Printf.eprintf "Bad regexp: %s at position %d\n  %s\n%!" msg pos l;
+         a
   in File.foldfile filename insert (Hashtbl.create 650)
 
 let remaining_iter f (outbuffer, pos) =
