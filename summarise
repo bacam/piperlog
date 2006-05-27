@@ -7,11 +7,13 @@
 ^sshd\[[0-9]+\]: error: PAM: Authentication service cannot retrieve authentication info\. for .+ from (.+)$
 ^sshd\[[0-9]+\]: Illegal user .+ from (.+)$
 ^sshd\[[0-9]+\]: reverse mapping checking getaddrinfo for (.+) failed - POSSIBLE BREAKIN ATTEMPT!$
+^sshd\[[0-9]+\]: Address (\S+) maps to (\S+), but this does not map back to the address - POSSIBLE BREAKIN ATTEMPT!$
+
 
 
 ^postfix/smtp\[[0-9]+\]: connect to (.+): Connection timed out \(port 25\)$
 ^postfix/smtpd\[[0-9]+\]: warning: smtpd_peer_init: (.+) verification failed: Name or service not known$
+^postfix/smtp\[[0-9]+\]: \S+: host (\S+) refused to talk to me: (.*)$
 
 ^getty\[[0-9]+\]: (/dev/tty.+): cannot open as standard input: No such device$
-
-
+^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=([^[:space:]]+), (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=(.*)$
