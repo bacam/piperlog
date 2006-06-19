@@ -1,5 +1,3 @@
-let malformed = ref 0;;
-
 type recentstr = RecentStr of int * string array
 
 let arrayfind f a =
@@ -18,10 +16,16 @@ let rec listfind f l =
   | (h::t) -> (match f h with None -> listfind f t | v -> v)
 ;;
 
+(* We retain a buffer of recent messages, and note whether they matched
+   one of the "summarise" entries so that later matches to the same
+   entry get included. *)
 
 type msgrecord = Normal
                | Summarise of Pcre.regexp * string array
 
+(* Put a message into the buffer (or increment the count against a
+   matching message in the buffer).  If the buffer is full, we return
+   the oldest message. *)
 let pushmsg summarise (outbuffer, nextindex) (time,host,message) =
   let dupcheck (host,message) (_,host',message',record, _) =
     if host <> host' then false else
@@ -62,6 +66,7 @@ let print_line (t,h,s,record,count) =
     | Summarise _ -> Printf.printf "%s  and %d similar entries.\n" t count
     else ()
 
+let malformed = ref 0
 let maxmalformed = 50
 let print_malformed s =
   malformed := !malformed + 1;
