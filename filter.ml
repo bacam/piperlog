@@ -1,5 +1,3 @@
-type recentstr = RecentStr of int * string array
-
 let arrayfind f a =
   let i = ref 0 in
   let l = Array.length a in
@@ -78,15 +76,16 @@ let print_malformed s =
     else print_string "Malformed log message: "; print_endline s
   end
 
-let timehost_r = Pcre.regexp
-  "^(\\S+ +\\S+ +\\S+) +(\\S+) +((?:([^ :[]+)(?:\\[[0-9]+\\])?:)?.*\\S)\\s*$";;
-
 let checkignore ignorable service m =
   let rs = Hashtbl.find_all ignorable service in
   if List.exists (fun r -> Pcre.pmatch ~rex:r m) rs then true else
   let rs' = Hashtbl.find_all ignorable "" in
   List.exists (fun r -> Pcre.pmatch ~rex:r m) rs'
   
+
+(* Separate time, host and message, and find out the service if there is one. *)
+let timehost_r = Pcre.regexp
+  "^(\\S+ +\\S+ +\\S+) +(\\S+) +((?:([^ :[]+)(?:\\[[0-9]+\\])?:)?.*\\S)\\s*$";;
 
 let filter ignorable outbuffer summaries s =
   try
@@ -101,6 +100,8 @@ let filter ignorable outbuffer summaries s =
   with Not_found -> print_malformed s
 ;;
 
+(* Note the list reversal to ensure the regexps are in the same order as the
+   file. *)
 let readregexps filename =
   let addregexp a l =
     try (Pcre.regexp l)::a
