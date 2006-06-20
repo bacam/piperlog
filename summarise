@@ -17,3 +17,7 @@
 
 ^getty\[[0-9]+\]: (/dev/tty.+): cannot open as standard input: No such device$
 ^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=([^[:space:]]+), (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=(.*)$
+
+# Generic summarisation -- ignores pid.
+^([^[: ]+)\[[0-9]+\]:(.*)$
+
