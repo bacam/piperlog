@@ -108,7 +108,7 @@ let readregexps filename =
       Printf.eprintf "Bad regexp: %s at position %d\n  %s\n%!" msg pos l;
       a
   in
-  File.foldfile filename addregexp []
+  List.rev (File.foldfile filename addregexp [])
 ;;
 
 (* Might be more efficient if stored (and updated) a list in the hash table,
