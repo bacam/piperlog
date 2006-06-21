@@ -139,6 +139,12 @@ let inchan = if usefile then open_in Sys.argv.(1) else stdin in
 let ignorable = mkignore "ignore" in
 let summarisable = readregexps "summarise" in
 let outbuffer = (Array.make 25 ("", "", "", Normal, 0), ref 0) in
-Pcre.foreach_line ~ic:inchan (filter ignorable outbuffer summarisable);
+let linecount = ref 0 in
+let processline l =
+  linecount := !linecount + 1;
+  filter ignorable outbuffer summarisable l
+in
+Pcre.foreach_line ~ic:inchan processline;
 remaining_iter print_line outbuffer;
+Printf.printf "\nSummary produced from %d lines of input by piperlog.\n" !linecount;
 if usefile then close_in inchan else ();;
