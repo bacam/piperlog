@@ -25,7 +25,7 @@ type msgrecord = Normal
    matching message in the buffer).  If the buffer is full, we return
    the oldest message. *)
 let pushmsg summarise (outbuffer, nextindex) (time,host,message) =
-  let dupcheck (host,message) (_,host',message',record, _) =
+  let dupcheck (host,message) (_,host',message',record,_,_) =
     if host <> host' then false else
     match record with
       Normal -> message = message'
@@ -36,11 +36,11 @@ let pushmsg summarise (outbuffer, nextindex) (time,host,message) =
 	with Not_found -> false
   in match arrayfind (dupcheck (host,message)) outbuffer with
        Some i ->
-         let (t,h,m,r,c) = outbuffer.(i) in
-	 outbuffer.(i) <- (t,h,m,r,c+1);
+         let (t,h,m,r,c,l) = outbuffer.(i) in
+	 outbuffer.(i) <- (t,h,m,r,c+1,time);
 	 None
      | None ->
-         let (t,_,_,_,_) as old = outbuffer.(!nextindex) in
+         let (t,_,_,_,_,_) as old = outbuffer.(!nextindex) in
 	 let trysummarise m r =
 	   try Some (r, Pcre.extract ~rex:r ~full_match:false m)
 	   with Not_found -> None
@@ -49,19 +49,21 @@ let pushmsg summarise (outbuffer, nextindex) (time,host,message) =
 	                None -> Normal
 	              | Some (rex,details) -> Summarise (rex,details)
          in
-         outbuffer.(!nextindex) <- (time,host,message,record,1);
+         outbuffer.(!nextindex) <- (time,host,message,record,1,time);
 	 nextindex := (!nextindex + 1) mod Array.length outbuffer;
 	 if t = "" then None else Some old
 
 
 
-let print_line (t,h,s,record,count) =
+let print_line (t,h,s,record,count,last) =
   if t = "" then () else
   print_endline (t ^ " " ^ h ^ " " ^ s);
   if count > 1
     then match record with
-      Normal -> Printf.printf "%s  repeated %d times.\n" t count
-    | Summarise _ -> Printf.printf "%s  and %d similar entries.\n" t count
+      Normal -> Printf.printf "%s  repeated %d times, ending at %s.\n"
+                              t count last
+    | Summarise _ -> Printf.printf "%s  and %d similar entries, ending at %s.\n"
+    	                           t count last
     else ()
 
 let malformed = ref 0
@@ -138,7 +140,7 @@ let usefile = Array.length Sys.argv > 1 in
 let inchan = if usefile then open_in Sys.argv.(1) else stdin in
 let ignorable = mkignore "ignore" in
 let summarisable = readregexps "summarise" in
-let outbuffer = (Array.make 25 ("", "", "", Normal, 0), ref 0) in
+let outbuffer = (Array.make 25 ("", "", "", Normal, 0, ""), ref 0) in
 let linecount = ref 0 in
 let processline l =
   linecount := !linecount + 1;
