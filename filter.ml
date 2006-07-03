@@ -136,11 +136,27 @@ let remaining_iter f (outbuffer, pos) =
   done
 ;;
 
-let usefile = Array.length Sys.argv > 1 in
-let inchan = if usefile then open_in Sys.argv.(1) else stdin in
-let ignorable = mkignore "ignore" in
-let summarisable = readregexps "summarise" in
-let outbuffer = (Array.make 25 ("", "", "", Normal, 0, ""), ref 0) in
+let filename = ref None in
+let bufsize = ref 25 in
+let ignorefile = ref "ignore" in
+let summaryfile = ref "summarise" in
+Arg.parse [
+   ("--buffer-size", Arg.Int
+     (fun i -> if i > 0 then bufsize := i
+                        else raise (Arg.Bad "Buffer size must be at least 1")),
+			                               "Size of output buffer");
+   ("--ignore-file", Arg.Set_string ignorefile,
+                                          "File containing patterns to ignore");
+   ("--summary-file", Arg.Set_string summaryfile,
+                                       "File containing patterns to summarise")
+  ] (fun s -> match !filename with None -> filename := Some s
+                                 | _ -> raise (Arg.Bad "Too many arguments"))
+  ("Usage: filter [--buffer-size <size>] [--ignore-file <file name>]\n" ^
+   "              [--summary-file <file name>] [<file name>]");
+let inchan = match !filename with Some f -> open_in f | _ -> stdin in
+let ignorable = mkignore !ignorefile in
+let summarisable = readregexps !summaryfile in
+let outbuffer = (Array.make !bufsize ("", "", "", Normal, 0, ""), ref 0) in
 let linecount = ref 0 in
 let processline l =
   linecount := !linecount + 1;
@@ -149,4 +165,4 @@ in
 Pcre.foreach_line ~ic:inchan processline;
 remaining_iter print_line outbuffer;
 Printf.printf "\nSummary produced from %d lines of input by piperlog.\n" !linecount;
-if usefile then close_in inchan else ();;
+match !filename with Some _ -> close_in inchan | _ -> ();;
