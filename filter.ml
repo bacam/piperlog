@@ -62,8 +62,8 @@ let print_line (t,h,s,record,count,last) =
     then match record with
       Normal -> Printf.printf "%s  repeated %d times, ending at %s.\n"
                               t count last
-    | Summarise _ -> Printf.printf "%s  and %d similar entries, ending at %s.\n"
-    	                           t count last
+    | Summarise _ -> Printf.printf "%s  and %d similar %s, ending at %s.\n"
+    	               t (count-1) (if count > 2 then "entries" else "entry") last
     else ()
 
 let malformed = ref 0
