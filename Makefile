@@ -1,4 +1,4 @@
-TARGETS=filter.bc filter convert.bc convert
+TARGETS=piperlog.bc piperlog convert.bc convert
 
 all: $(TARGETS)
 
@@ -15,9 +15,9 @@ clean:
 %.cmx %.o: %.ml
 	ocamlopt -c -I +pcre $<
 
-filter.bc: file.cmo filter.cmo
+piperlog.bc: file.cmo filter.cmo
 	ocamlc -g -I +pcre -o $@ pcre.cma $^
-filter: file.cmx filter.cmx
+piperlog: file.cmx filter.cmx
 	ocamlopt -I +pcre -o $@ pcre.cmxa $^
 
 convert.bc: file.cmo convert.cmo
