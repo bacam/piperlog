@@ -152,8 +152,8 @@ Arg.parse [
                                        "File containing patterns to summarise");
    ("--", Arg.Rest addfilename, "File to be filtered")
   ] addfilename
-  ("Usage: filter [--buffer-size <size>] [--ignore-file <file name>]\n" ^
-   "              [--summary-file <file name>] [[--] <file name> ...]");
+  ("Usage: piperlog [--buffer-size <size>] [--ignore-file <file name>]\n" ^
+   "                [--summary-file <file name>] [[--] <file name> ...]");
 filenames := List.rev !filenames;
 let ignorable = mkignore !ignorefile in
 let summarisable = readregexps !summaryfile in
