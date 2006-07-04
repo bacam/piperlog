@@ -152,10 +152,10 @@ in Arg.parse [
                                           "File containing patterns to ignore");
    ("--summary-file", Arg.Set_string summaryfile,
                                        "File containing patterns to summarise");
-   ("-f", Arg.String setfilename, "File to be filtered")
+   ("--", Arg.Rest setfilename, "File to be filtered")
   ] setfilename
   ("Usage: filter [--buffer-size <size>] [--ignore-file <file name>]\n" ^
-   "              [--summary-file <file name>] [[-f] <file name>]");
+   "              [--summary-file <file name>] [[--] <file name>]");
 let inchan = match !filename with Some f -> open_in f | _ -> stdin in
 let ignorable = mkignore !ignorefile in
 let summarisable = readregexps !summaryfile in
