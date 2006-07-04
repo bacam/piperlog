@@ -136,14 +136,12 @@ let remaining_iter f (outbuffer, pos) =
   done
 ;;
 
-let filename = ref None in
+let filenames = ref [] in
 let bufsize = ref 25 in
 let ignorefile = ref "ignore" in
 let summaryfile = ref "summarise" in
-let setfilename s =
-  match !filename with None -> filename := Some s
-                     | _ -> raise (Arg.Bad "Too many arguments")
-in Arg.parse [
+let addfilename s = filenames := s::(!filenames) in
+Arg.parse [
    ("--buffer-size", Arg.Int
      (fun i -> if i > 0 then bufsize := i
                         else raise (Arg.Bad "Buffer size must be at least 1")),
@@ -152,11 +150,11 @@ in Arg.parse [
                                           "File containing patterns to ignore");
    ("--summary-file", Arg.Set_string summaryfile,
                                        "File containing patterns to summarise");
-   ("--", Arg.Rest setfilename, "File to be filtered")
-  ] setfilename
+   ("--", Arg.Rest addfilename, "File to be filtered")
+  ] addfilename
   ("Usage: filter [--buffer-size <size>] [--ignore-file <file name>]\n" ^
-   "              [--summary-file <file name>] [[--] <file name>]");
-let inchan = match !filename with Some f -> open_in f | _ -> stdin in
+   "              [--summary-file <file name>] [[--] <file name> ...]");
+filenames := List.rev !filenames;
 let ignorable = mkignore !ignorefile in
 let summarisable = readregexps !summaryfile in
 let outbuffer = (Array.make !bufsize ("", "", "", Normal, 0, ""), ref 0) in
@@ -165,7 +163,13 @@ let processline l =
   linecount := !linecount + 1;
   filter ignorable outbuffer summarisable l
 in
-Pcre.foreach_line ~ic:inchan processline;
+let processchannel inchan = Pcre.foreach_line ~ic:inchan processline in 
+let processfile filename =
+  let channel = open_in filename in
+  processchannel channel;
+  close_in channel
+in
+match !filenames with [] -> processchannel stdin
+                    | _  -> List.iter processfile !filenames;
 remaining_iter print_line outbuffer;
-Printf.printf "\nSummary produced from %d lines of input by piperlog.\n" !linecount;
-match !filename with Some _ -> close_in inchan | _ -> ();;
+Printf.printf "\nSummary produced from %d lines of input by piperlog.\n" !linecount;;
