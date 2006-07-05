@@ -1,8 +1,10 @@
-TARGETS=piperlog.bc piperlog convert.bc convert
+PROGRAMS=piperlog.bc piperlog convert.bc convert
+TARGETS=$(PROGRAMS) piperlog.html
 
+progs: $(PROGRAMS)
 all: $(TARGETS)
 
-.PHONY: all clean
+.PHONY: progs all clean
 
 clean:
 	rm -f $(TARGETS) *.cmo *.cmi *.cmx *.o depends
@@ -14,6 +16,9 @@ clean:
 
 %.cmx %.o: %.ml
 	ocamlopt -c -I +pcre $<
+
+%.html: %.man
+	groff -man -Thtml $< > $@
 
 piperlog.bc: file.cmo filter.cmo
 	ocamlc -g -I +pcre -o $@ pcre.cma $^
