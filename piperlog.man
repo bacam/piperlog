@@ -1,0 +1,48 @@
+.TH PIPERLOG 1 "4 July 2006" Tardis "Piperlog manual"
+.SH NAME
+piperlog \- summarise log file messages
+.SH SYNOPSIS
+.B piperlog
+.RB [ \-\-buffer\-size
+.IR size ]
+.RB [ \-\-ignore\-file
+.IR file ]
+.RB [ \-\-summary\-file
+.IR file ]
+.RB [[ \-\- ]
+.IR "file ..." ]
+.SH DESCRIPTION
+Provide a summary of the supplied log messages.  Lines matching patterns in
+the
+.I ignore
+file will be discarded, and those matching patterns in the
+.I summary
+file will be combined with other recent matches unless they differ in captured
+parts (those in parenthesis in the patterns).
+.PP
+If no files are given on the command line to summarise, then the standard input
+is used.  The normal way to invoke the program is to use a pipe from
+.BR logmerge (1)
+to summarise a number of log files simultaneously.
+.PP
+The patterns are PCRE regular expressions, see the
+.BR pcrepattern (3)
+manual page for details.
+.SH OPTIONS
+.IP "\-\-buffer\-size size"
+The size of the output buffer where we look for duplicates.
+.IP "\-\-ignore\-file file"
+Ignore lines matching the patterns in the given file.  By default a file
+called
+.I ignore
+is used.
+.IP "\-\-summary\-file file"
+Summarise lines matching the patterns in the given file.  By default a file
+called
+.I summarise
+is used.
+.SH AUTHORS
+Brian Campbell (bacam@tardis.ed.ac.uk).
+.SH SEE ALSO
+.BR logmerge (1),
+.BR pcrepattern (3)
