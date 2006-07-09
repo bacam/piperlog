@@ -1,0 +1,10 @@
+^su\[[0-9]+\]: (\+|-) (pts/[0-9]{1,2}|tty[0-9]) [_[:alnum:]-]+:(?!root)[_[:alnum:]-]+$
+^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user (?!root)[[:alnum:]-]+ by \(uid=[0-9]+\)$
+^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user (?!root)[[:alnum:]-]+ by [[:alnum:]-]+\(uid=[0-9]+\)$
+^sudo:[[:space:]]+[_[:alnum:]-]+ : TTY=(unknown|pts/[0-9]+|tty[0-9]+) ; PWD=.+ ; USER=(?!root)[^[:space:]]+ ; COMMAND=/(usr|etc|bin|sbin)/.*$
+^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=[^[:space:]]+, (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=sent \(.*\)$
+^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: conversation with \S+ timed out
+^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: lost connection with \S+ while
+
+# The 11 means SSH2_DISCONNECT_BY_APPLICATION
+^sshd\[[0-9]+\]: Received disconnect from \S+: 11: Terminating connection$

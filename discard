@@ -1,0 +1,27 @@
+# Hey!  There are at least two sets of named entries!
+^named\[[0-9]+\]: reloading$
+^named\[[0-9]+\]: Sent NOTIFY for [^[:space:]]+$
+^named\[[0-9]+\]: zone [^[:space:]]+: transfered serial [0-9]+$
+^named\[[0-9]+\]: rcvd NOTIFY\([^[:space:]]+, IN, SOA\) from \[[\.0-9]+\]\.[0-9]+$
+# Not really bothering about postfix too much; can go to pflogsumm
+^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=[^[:space:]]+, (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=[[:alnum:]]+ \(.*\)$
+^syslogd [.0-9#]+: restart\.$
+^named\[[0-9]+\]: zone [._[:alnum:]-]+/IN: transferred serial [0-9]+$
+^named\[[0-9]+\]: (client [.#[:digit:]]+: )?received notify for zone '[._[:alnum:]-]+'$
+^named\[[0-9]+\]: unexpected RCODE \((REFUSED|SERVFAIL)\) resolving '[^[:space:]]+': [.[:digit:]]+#[0-9]+$
+# innd/jabberd messages probably worth a look if we start using it
+^kernel: lp[0-9]+ out of paper$
+# Um, perhaps these are worth a Debian bug report?
+^ntpd\[[0-9]+\]: time reset [+-]*[0-9]{1,2}\.[0-9]{6} s$
+^ntpd\[[0-9]+\]: synchronisation lost$
+^ntpd\[[0-9]+\]: no servers reachable$
+^sshd\[[0-9]+\]: Server listening on [.0-9]+ port 22\.$
+^sshd\[[0-9]+\]: refused connect from [:[:alnum:].]+ \([:[:alnum:].]+\)$
+^anacron\[[0-9]+\]: Anacron [.[:alnum:]]+ started on [0-9-]+$
+^postfix/postfix-script: (starting|stopping) the Postfix mail system$
+^postfix/master\[[0-9]+\]: reload configuration$
+# Some nice su/sudo stuff would be good.
+^su\[[0-9]+\]: (\+|-) (pts/[0-9]{1,2}|tty[0-9]) [_[:alnum:]-]+:[_[:alnum:]-]+$
+^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user [[:alnum:]-]+ by \(uid=[0-9]+\)$
+^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user [[:alnum:]-]+ by [[:alnum:]-]+\(uid=[0-9]+\)$
+^sudo:[[:space:]]+[_[:alnum:]-]+ : TTY=(unknown|pts/[0-9]+|tty[0-9]+) ; PWD=.+ ; USER=[^[:space:]]+ ; COMMAND=/(usr|etc|bin|sbin)/.*$

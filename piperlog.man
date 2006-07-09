@@ -1,4 +1,4 @@
-.TH PIPERLOG 1 "4 July 2006" Tardis "Piperlog manual"
+.TH PIPERLOG 1 "9 July 2006" Tardis "Piperlog manual"
 .SH NAME
 piperlog \- summarise log file messages
 .SH SYNOPSIS
@@ -41,6 +41,31 @@ Summarise lines matching the patterns in the given file.  By default a file
 called
 .I summarise
 is used.
+.SH EXAMPLES
+A sample summarise file is included, along with a couple of scripts to make
+an ignore file from a set of
+.BR logcheck (8)
+pattern files.  The
+.I mkignore
+script takes the pattern files and uses
+.I convert
+to change them into
+.BR piperlog (1)
+format, while adding the patterns in the
+.I extra
+file and dropping those in the
+.I discard
+file.  Sample
+.I extra
+and
+.I discard
+files are provided.
+.PP
+The
+.BR logmerge (1)
+manual page includes instructions on setting up a
+.BR cron (8)
+job to produce regular log summaries.
 .SH AUTHORS
 Brian Campbell (bacam@tardis.ed.ac.uk).
 .SH SEE ALSO
