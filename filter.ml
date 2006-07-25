@@ -169,7 +169,7 @@ let processfile filename =
   processchannel channel;
   close_in channel
 in
-match !filenames with [] -> processchannel stdin
-                    | _  -> List.iter processfile !filenames;
+(match !filenames with [] -> processchannel stdin
+                     | _  -> List.iter processfile !filenames);
 remaining_iter print_line outbuffer;
-Printf.printf "\nSummary produced from %d lines of input by piperlog.\n" !linecount;;
+Printf.printf "\nSummary produced from %d lines of input by piperlog.\n%!" !linecount;;
