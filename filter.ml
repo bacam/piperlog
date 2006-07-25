@@ -60,9 +60,9 @@ let print_line (t,h,s,record,count,last) =
   print_endline (t ^ " " ^ h ^ " " ^ s);
   if count > 1
     then match record with
-      Normal -> Printf.printf "%s  repeated %d times, ending at %s.\n"
+      Normal -> Printf.printf "%s  ^ repeated %d times, ending at %s.\n"
                               t count last
-    | Summarise _ -> Printf.printf "%s  and %d similar %s, ending at %s.\n"
+    | Summarise _ -> Printf.printf "%s  ^ and %d similar %s, ending at %s.\n"
     	               t (count-1) (if count > 2 then "entries" else "entry") last
     else ()
 
