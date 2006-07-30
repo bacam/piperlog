@@ -14,10 +14,10 @@
 ^postfix/smtp\[[0-9]+\]: connect to (.+): Connection timed out \(port 25\)$
 ^postfix/smtpd\[[0-9]+\]: warning: smtpd_peer_init: (.+) verification failed: Name or service not known$
 ^postfix/smtp\[[0-9]+\]: \S+: host (\S+) refused to talk to me: (.*)$
-^postfix/qmgr\[[0-9]+\]: \S+: to=(\S+), orig_to=(\S+), relay=none, delay=[0-9]+, status=deferred (.+)$
+^postfix/qmgr\[[0-9]+\]: \S+: to=(\S+)(, orig_to=(\S+))?, relay=none, delay=[0-9]+, status=deferred (.+)$
 
 ^getty\[[0-9]+\]: (/dev/tty.+): cannot open as standard input: No such device$
-^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=([^[:space:]]+), (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=(.*)$
+^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=([^[:space:]]+), (orig_to=[^[:space:]]+, )?relay=[^[:space:]]+, delay=[0-9]+, status=(.*)$
 
 # Generic summarisation -- ignores pid.
 ^([^[: ]+)\[[0-9]+\]:(.*)$
