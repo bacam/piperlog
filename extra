@@ -10,3 +10,6 @@
 
 # The 11 means SSH2_DISCONNECT_BY_APPLICATION
 ^sshd\[[0-9]+\]: Received disconnect from \S+: 11: Terminating connection$
+
+^exim\[[0-9]+\]: [0-9-]+ [0-9:]+ Start queue run: pid=[0-9]+$
+
