@@ -19,6 +19,8 @@
 ^getty\[[0-9]+\]: (/dev/tty.+): cannot open as standard input: No such device$
 ^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=([^[:space:]]+), (orig_to=[^[:space:]]+, )?relay=[^[:space:]]+, delay=[0-9]+, status=(.*)$
 
+^postfix/smtpd\[[0-9]+\]: warning: [0-9.]+.(\S+): RBL lookup error: Host or domain name not found. Name service error for name=\S+ type=(.*)$
+
 ^exim\[[0-9]+\]: [0-9-]+ [0-9:]+ Cannot open main log file "([^"]+)": (.*)$
 
 # Generic summarisation -- ignores pid.
