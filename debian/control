@@ -1,0 +1,15 @@
+Source: piperlog
+Section: admin
+Priority: optional
+Maintainer: Brian Campbell <bacam@tardis.ed.ac.uk>
+Build-Depends: debhelper (>= 4.0.0), ocaml-nox-3.08.3, libpcre-ocaml-dev
+Standards-Version: 3.6.1
+
+Package: piperlog
+Architecture: any
+Depends: ${shlibs:Depends}
+Suggests: logmerge
+Description: Generate summaries of log file contents
+ The piperlog program generates summarised versions of the log messages
+ provided to it.  It can ignore irrelevant messages and summarise similar
+ messages, which are specified by regular expressions.
