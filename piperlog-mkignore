@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+logcheckdir=/etc/logcheck
+while getopts d: opt
+do case $opt in
+   d) logcheckdir="$OPTARG";;
+   ?) echo "Usage: piperlog-mkignore [-d <logcheck directory>]"
+      exit 1;;
+   esac
+done
+(cd "$logcheckdir"; \
+ find violations.ignore.d ignore.d.server \
+      ignore.d.paranoid ignore.d.workstation -type f \
+ | xargs cat) \
+ | piperlog-convert

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-find violations.ignore.d ignore.d.server ignore.d.paranoid ignore.d.workstation -type f \
- | xargs cat \
- | ./convert > ignore.new
-cat extra >> ignore.new
