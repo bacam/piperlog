@@ -34,12 +34,12 @@ The size of the output buffer where we look for duplicates.
 .IP "\-\-ignore\-file file"
 Ignore lines matching the patterns in the given file.  By default a file
 called
-.I ignore
+.I /etc/piperlog/ignore
 is used.
 .IP "\-\-summary\-file file"
 Summarise lines matching the patterns in the given file.  By default a file
 called
-.I summarise
+.I /etc/piperlog/summarise
 is used.
 .SH EXAMPLES
 A sample summarise file is included, along with a couple of scripts to make
@@ -66,6 +66,9 @@ The
 manual page includes instructions on setting up a
 .BR cron (8)
 job to produce regular log summaries.
+.SH FILES
+.IR /etc/piperlog/summarise ,
+.IR /etc/piperlog/ignore .
 .SH AUTHORS
 Brian Campbell (bacam@tardis.ed.ac.uk).
 .SH SEE ALSO

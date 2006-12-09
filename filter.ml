@@ -138,8 +138,8 @@ let remaining_iter f (outbuffer, pos) =
 
 let filenames = ref [] in
 let bufsize = ref 25 in
-let ignorefile = ref "ignore" in
-let summaryfile = ref "summarise" in
+let ignorefile = ref "/etc/piperlog/ignore" in
+let summaryfile = ref "/etc/piperlog/summarise" in
 let addfilename s = filenames := s::(!filenames) in
 Arg.parse [
    ("--buffer-size", Arg.Int
