@@ -1,4 +1,4 @@
-PROGRAMS=piperlog.bc piperlog convert.bc convert
+PROGRAMS=piperlog.bc piperlog piperlog-convert.bc piperlog-convert
 TARGETS=$(PROGRAMS) piperlog.html
 
 progs: $(PROGRAMS)
@@ -25,12 +25,12 @@ piperlog.bc: file.cmo filter.cmo
 piperlog: file.cmx filter.cmx
 	ocamlopt -I +pcre -o $@ pcre.cmxa $^
 
-convert.bc: file.cmo convert.cmo
+piperlog-convert.bc: file.cmo piperlog-convert.cmo
 	ocamlc -g -I +pcre -o $@ pcre.cma $^
-convert: file.cmx convert.cmx
+piperlog-convert: file.cmx piperlog-convert.cmx
 	ocamlopt -I +pcre -o $@ pcre.cmxa $^
 
-depends: file.ml filter.ml convert.ml
+depends: file.ml filter.ml piperlog-convert.ml
 	ocamldep $^ > $@
 
 include depends
