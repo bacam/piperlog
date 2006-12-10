@@ -32,6 +32,7 @@ install: build
 	install -D -o root -g root piperlog $(CURDIR)/debian/piperlog/usr/bin/piperlog
 	install -D -o root -g root piperlog-convert $(CURDIR)/debian/piperlog/usr/bin/piperlog-convert
 	install -D -o root -g root piperlog-mkignore $(CURDIR)/debian/piperlog/usr/bin/piperlog-mkignore
+	install -D -o root -g root summarise $(CURDIR)/debian/piperlog/etc/piperlog/summarise
 
 
 # Build architecture-independent files here.
