@@ -5,7 +5,7 @@
 ^postfix/(local|pipe|virtual)\[[0-9]+\]: [[:alnum:]]+: to=[^[:space:]]+, (orig_to=[^[:space:]]+, |)relay=[^[:space:]]+, delay=[0-9]+, status=sent \(.*\)$
 ^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: conversation with \S+ timed out
 ^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: lost connection with \S+ while
-^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: host \S+ refused to talk to me: 451
+^postfix/smtp\[[0-9]+\]: [[:alnum:]]+: host \S+ refused to talk to me: 4
 
 
 # The 11 means SSH2_DISCONNECT_BY_APPLICATION
