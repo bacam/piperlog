@@ -13,3 +13,14 @@
 
 ^exim\[[0-9]+\]: [0-9-]+ [0-9:]+ Start queue run: pid=[0-9]+$
 
+# This appears to be one of those bizarre issues we can do nothing about
+#   http://www.uwsg.iu.edu/hypermail/linux/kernel/0307.3/0947.html
+^kernel: udp v4 hw csum failure\.$
+^kernel: hw tcp v4 csum failed$
+^kernel: icmp v4 hw csum failure$
+^kernel: NET: [0-9]+ messages suppressed\.$
+
+# Some nonsense we get from our Redhat machines
+^crond\[[0-9]+\]: \([[:alnum:]]+\) CMD 
+^sendmail\[[0-9]+\]: [[:alnum:]]+: from=[^[:space:]]+, size=[0-9]+, class=[0-9]+, nrcpts=[0-9]+, msgid=[^[:space:]]+,( proto=ESMTP,)?( daemon=MTA,)? relay=
+^sendmail\[[0-9]+\]: [[:alnum:]]+: to=[^[:space:]]+, ctladdr=[^[:space:]]+ \(0\/0\), delay=[0-9:]+, xdelay=[0-9:]+, mailer=(relay|local), pri=[0-9]+(, relay=.+)?, dsn=[0-9.]+, stat=Sent
