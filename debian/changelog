@@ -2,7 +2,7 @@ piperlog (0.3) unstable; urgency=low
 
   * Make Debian package ambivalent to the ocaml version in use.
 
- -- Brian Campbell <bacam@tardis.ed.ac.uk> Sat, 28 Apr 2007 17:33:53 +0100
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 28 Apr 2007 17:33:53 +0100
 
 piperlog (0.2) unstable; urgency=low
 
