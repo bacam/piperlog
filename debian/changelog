@@ -1,8 +1,10 @@
-piperlog (0.1+darcs) unstable; urgency=low
+piperlog (0.2) unstable; urgency=low
 
-  * Some working version.
+  * Added more messages that we've seen on Tardis that we don't want.
+  * Add discard file to the package.
+  * Add discard file name to be given on the command line
 
- -- Brian Campbell <bacam@tardis.ed.ac.uk>  Fri, 15 Dec 2006 21:54:00 +0000
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 28 Apr 2007 17:14:00 +0000
 
 piperlog (0.1) unstable; urgency=low
 
