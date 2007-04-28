@@ -2,7 +2,7 @@ Source: piperlog
 Section: admin
 Priority: optional
 Maintainer: Brian Campbell <bacam@tardis.ed.ac.uk>
-Build-Depends: debhelper (>= 4.0.0), ocaml-nox-3.08.3, libpcre-ocaml-dev
+Build-Depends: debhelper (>= 4.0.0), ocaml-nox, libpcre-ocaml-dev
 Standards-Version: 3.6.1
 
 Package: piperlog

@@ -1,10 +1,16 @@
+piperlog (0.3) unstable; urgency=low
+
+  * Make Debian package ambivalent to the ocaml version in use.
+
+ -- Brian Campbell <bacam@tardis.ed.ac.uk> Sat, 28 Apr 2007 17:33:53 +0100
+
 piperlog (0.2) unstable; urgency=low
 
   * Added more messages that we've seen on Tardis that we don't want.
   * Add discard file to the package.
   * Add discard file name to be given on the command line
 
- -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 28 Apr 2007 17:14:00 +0000
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 28 Apr 2007 17:14:00 +0100
 
 piperlog (0.1) unstable; urgency=low
 
