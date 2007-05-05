@@ -6,6 +6,7 @@
 ^sshd\[[0-9]+\]: \(pam_unix\) authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=(.+)$
 ^sshd\[[0-9]+\]: error: PAM: Authentication service cannot retrieve authentication info\. for .+ from (.+)$
 ^sshd\[[0-9]+\]: Illegal user .+ from (.+)$
+^sshd\[[0-9]+\]: Invalid user .+ from (.+)$
 ^sshd\[[0-9]+\]: reverse mapping checking getaddrinfo for (.+) failed - POSSIBLE BREAKIN ATTEMPT!$
 ^sshd\[[0-9]+\]: Address (\S+) maps to (\S+), but this does not map back to the address - POSSIBLE BREAKIN ATTEMPT!$
 

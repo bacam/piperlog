@@ -25,3 +25,8 @@
 ^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user [[:alnum:]-]+ by \(uid=[0-9]+\)$
 ^su\[[0-9]+\]: \(pam_[[:alnum:]]+\) session opened for user [[:alnum:]-]+ by [[:alnum:]-]+\(uid=[0-9]+\)$
 ^sudo:[[:space:]]+[_[:alnum:]-]+ : TTY=(unknown|pts/[0-9]+|tty[0-9]+) ; PWD=.+ ; USER=[^[:space:]]+ ; COMMAND=/(usr|etc|bin|sbin)/.*$
+^sudo:[[:space:]]+[_[:alnum:].-]+ : TTY=(unknown|(pts/|tty|vc/)[[:digit:]]+) ; PWD=[^;]+ ; USER=[._[:alnum:]-]+ ; COMMAND=(/(usr|etc|bin|sbin)/|sudoedit ).*$
+^sudo:[[:space:]]+[_[:alnum:].-]+ : \(command continued\).*$
+# Some dodgy regular expressions;  I don't use dspam, so just remove them
+^dspam\[[0-9]+\]: spam detected from [.0-9]+{7,15}$
+^dspam\[[0-9]+\]: innocent message from [.0-9]+{7,15}$
