@@ -22,3 +22,11 @@ generate the summaries.
 
   5 */4 * * * (REPLYTO=sysmans@example.com; export REPLYTO; logmerge | piperlog | mail -s "some.example.com log summary at `date`" mrlogreader@example.com)
 
+
+Minor points:
+  - piperlog uses pcre "Perl compatible" regular expressions (see
+    pcrepattern(1)) rather than egrep "extended" regular expressions.
+    There are few differences.  I found that the \< and \> word end sequences
+    are not present, and repetitions are fussy about the preceeding part of
+    the regexp (eg., r+{2,3} is not allowed).  In the logcheck rules I looked
+    at these were only used by mistake, so they don't matter.
