@@ -1,3 +1,10 @@
+piperlog (0.4) unstable; urgency=low
+
+  * Add README file.
+  * Add rules useful on etch machines.
+
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 05 May 2007 16:28:26 +0100
+
 piperlog (0.3) unstable; urgency=low
 
   * Make Debian package ambivalent to the ocaml version in use.

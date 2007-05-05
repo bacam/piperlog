@@ -1,0 +1,24 @@
+The typical use of the piperlog and logmerge packages is to regularly provide
+summaries of the system logs by email.  The packages don't force a default
+setup for this, so here's a example.
+
+First, we need to produce the file of patterns to ignore.  This can be produced
+from an existing logcheck installation.  It uses the "discard" file in
+/etc/piperlog/discard to get rid of logcheck patterns that you don't want.
+
+  piper:~# piperlog-mkignore > /etc/piperlog/ignore
+
+We add a new user, initialise the "offsets" file which tells logmerge where to
+start reading the logs from (and which logs to read) and set up a cron job to
+generate the summaries.
+
+  piper:~# adduser --system --ingroup adm piperlog
+  Adding system user `piperlog'...
+  Adding new user `piperlog' (101) with group `adm'.
+  Creating home directory `/home/piperlog'.
+  piper:~# logmerge-mkoffsets /var/log/auth.log /var/log/syslog > /var/lib/logmerge/offsets
+  piper:~# chown -R piperlog.adm /var/lib/logmerge/
+  piper:~# crontab -e -u piperlog/etc/piperlog/ignore
+
+  5 */4 * * * (REPLYTO=sysmans@example.com; export REPLYTO; logmerge | piperlog | mail -s "some.example.com log summary at `date`" mrlogreader@example.com)
+
