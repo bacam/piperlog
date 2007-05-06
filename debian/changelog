@@ -1,3 +1,9 @@
+piperlog (0.4+darcs) unstable; urgency=low
+
+  * Some random development version.
+
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sun, 06 May 2007 14:01:41 +0100
+
 piperlog (0.4) unstable; urgency=low
 
   * Add README file.
