@@ -8,7 +8,6 @@
 ^syslogd [.0-9#]+: restart\.$
 ^named\[[0-9]+\]: zone [._[:alnum:]-]+/IN: transferred serial [0-9]+$
 ^named\[[0-9]+\]: (client [.#[:digit:]]+: )?received notify for zone '[._[:alnum:]-]+'$
-^named\[[0-9]+\]: unexpected RCODE \((REFUSED|SERVFAIL)\) resolving '[^[:space:]]+': [.[:digit:]]+#[0-9]+$
 # innd/jabberd messages probably worth a look if we start using it
 ^kernel: lp[0-9]+ out of paper$
 # Um, perhaps these are worth a Debian bug report?
