@@ -3,15 +3,40 @@
 set -e
 
 logcheckdir=/etc/logcheck
-while getopts d: opt
+level=""
+while getopts 'd:f:l:' opt
 do case $opt in
    d) logcheckdir="$OPTARG";;
-   ?) echo "Usage: piperlog-mkignore [-d <logcheck directory>]"
+   f) discard="$OPTARG";;
+   l) level="$OPTARG";;
+   ?) echo "Usage: piperlog-mkignore [-d <logcheck directory>] [ -f <discard file>]\n       [-l <level>]"
       exit 1;;
    esac
 done
-(cd "$logcheckdir"; \
- find violations.ignore.d ignore.d.server \
-      ignore.d.paranoid ignore.d.workstation -type f \
- | xargs cat) \
- | piperlog-convert
+if [ -z "$level" ]; then
+  if [ -f "$logcheckdir/logcheck.conf" ]; then
+    level=$(source "$logcheckdir/logcheck.conf" && echo $REPORTLEVEL)
+  else
+    level=server
+  fi
+fi
+case "$level" in
+  'workstation')
+    paths="violations.ignore.d ignore.d.server ignore.d.paranoid ignore.d.workstation" ;;
+  'server')
+    paths="violations.ignore.d ignore.d.server ignore.d.paranoid" ;;
+  'paranoid')
+    paths="violations.ignore.d ignore.d.paranoid" ;;
+  '')
+    paths="violations.ignore.d ignore.d.server ignore.d.paranoid" ;;
+  *)
+    echo "Level should be workstation, server or paranoid, was given: $level" >&2
+    exit 1
+    ;;
+esac
+(cd "$logcheckdir"; find $paths -type f | xargs cat) \
+ | if [ -z "$discard" ]; then
+     piperlog-convert
+   else
+     piperlog-convert --discard "$discard"
+   fi
