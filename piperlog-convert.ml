@@ -1,4 +1,5 @@
 let extracrap = "^\\w{3} [ :0-9]{11} [._[:alnum:]-]+ ";;
+let commentary = Pcre.regexp "^\\s*(#.*)?$"
 let extralen = String.length extracrap;;
 let discard = Hashtbl.create 20;;
 
@@ -19,6 +20,7 @@ File.foldfile !discardname (fun () l -> Hashtbl.add discard l ()) ();;
 try
 while true do
   let l = read_line () in
+  if Pcre.pmatch ~rex:commentary l then () else
   if String.length l > extralen && (String.sub l 0 extralen) = extracrap
   then begin
     if Hashtbl.mem discard
