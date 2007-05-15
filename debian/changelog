@@ -1,3 +1,9 @@
+piperlog (0.6) unstable; urgency=low
+
+  * Handle an alternative form of pattern from logcheck files.
+
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Tue, 15 May 2007 22:50:12 +0100
+
 piperlog (0.5) unstable; urgency=low
 
   * Include "discarded" patterns as comments in ignore file.

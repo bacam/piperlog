@@ -1,6 +1,7 @@
-let extracrap = "^\\w{3} [ :0-9]{11} [._[:alnum:]-]+ ";;
+let extracrap = List.map (fun s -> (String.length s, s))
+ ["^\\w{3} [ :0-9]{11} [._[:alnum:]-]+ ";
+  "^\\w{3} [ :[:digit:]]{11} [._[:alnum:]-]+ "];;
 let commentary = Pcre.regexp "^\\s*(#.*)?$"
-let extralen = String.length extracrap;;
 let discard = Hashtbl.create 20;;
 
 let discardname = ref "/etc/piperlog/discard" in
@@ -17,17 +18,24 @@ Arg.parse [
 
 File.foldfile !discardname (fun () l -> Hashtbl.add discard l ()) ();;
 
+let cut line =
+  let rec cutup = function [] -> None | (extralen,extra)::t ->
+    if String.length line > extralen && (String.sub line 0 extralen) = extra
+    then Some ("^" ^ (String.sub line extralen (String.length line - extralen)))
+    else cutup t
+  in cutup extracrap
+;;
+
 try
 while true do
   let l = read_line () in
   if Pcre.pmatch ~rex:commentary l then () else
-  if String.length l > extralen && (String.sub l 0 extralen) = extracrap
-  then begin
-    let cutline = "^" ^ (String.sub l extralen (String.length l - extralen)) in
-    if Hashtbl.mem discard cutline
-    then print_endline ("# discarded: " ^ cutline)
-    else print_endline cutline
-  end
-  else (prerr_string "Dodgy: "; prerr_endline l)
+  match cut l with
+    Some cutline ->
+      if Hashtbl.mem discard cutline
+      then print_endline ("# discarded: " ^ cutline)
+      else print_endline cutline
+  | None ->
+      (prerr_string "Dodgy: "; prerr_endline l)
 done
 with End_of_file -> ()
