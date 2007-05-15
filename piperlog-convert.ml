@@ -23,11 +23,10 @@ while true do
   if Pcre.pmatch ~rex:commentary l then () else
   if String.length l > extralen && (String.sub l 0 extralen) = extracrap
   then begin
-    if Hashtbl.mem discard
-         ("^" ^ (String.sub l extralen (String.length l - extralen)))
-    then ()
-    else (print_string "^";
-          print_endline (String.sub l extralen (String.length l - extralen)))
+    let cutline = "^" ^ (String.sub l extralen (String.length l - extralen)) in
+    if Hashtbl.mem discard cutline
+    then print_endline ("# discarded: " ^ cutline)
+    else print_endline cutline
   end
   else (prerr_string "Dodgy: "; prerr_endline l)
 done
