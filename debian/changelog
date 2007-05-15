@@ -1,8 +1,11 @@
-piperlog (0.4+darcs) unstable; urgency=low
+piperlog (0.5) unstable; urgency=low
 
-  * Some random development version.
+  * Include "discarded" patterns as comments in ignore file.
+  * Ignore blank lines and comments in conversion.
+  * Make mkignore more configurable.
+  * Remove bogus 'discard' pattern.
 
- -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sun, 06 May 2007 14:01:41 +0100
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Tue, 15 May 2007 22:18:29 +0100
 
 piperlog (0.4) unstable; urgency=low
 
