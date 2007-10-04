@@ -24,3 +24,7 @@
 ^crond\[[0-9]+\]: \([[:alnum:]]+\) CMD 
 ^sendmail\[[0-9]+\]: [[:alnum:]]+: from=[^[:space:]]+, size=[0-9]+, class=[0-9]+, nrcpts=[0-9]+, msgid=[^[:space:]]+,( proto=ESMTP,)?( daemon=MTA,)? relay=
 ^sendmail\[[0-9]+\]: [[:alnum:]]+: to=[^[:space:]]+, ctladdr=[^[:space:]]+ \(0\/0\), delay=[0-9:]+, xdelay=[0-9:]+, mailer=(relay|local), pri=[0-9]+(, relay=.+)?, dsn=[0-9.]+, stat=Sent
+
+# We don't use shared folders on the IMAP server
+^imaplogin: /etc/courier/shared/index: No such file or directory$
+
