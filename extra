@@ -28,3 +28,7 @@
 # We don't use shared folders on the IMAP server
 ^imaplogin: /etc/courier/shared/index: No such file or directory$
 
+# More general than the usual one.
+^smartd\[[0-9]+\]: Device: /dev/[[:lower:]]+, SMART Usage Attribute: 194 Temperature_Celsius changed from
+
+^kernel: firewall 
