@@ -31,4 +31,11 @@
 # More general than the usual one.
 ^smartd\[[0-9]+\]: Device: /dev/[[:lower:]]+, SMART Usage Attribute: 194 Temperature_Celsius changed from
 
+# This is a form of lame server log message.  You can also remove it entirely
+# by changing the logging settings for bind.
+^named\[[0-9]+\]: unexpected end of input resolving '
+
 ^kernel: firewall 
+
+# One of our users forwards onto mac.com, but they make you wait a lot.
+^postfix/qmgr\[[0-9]+\]: [[:alnum:]]+: to=<[^[:space:]]+@mac.com>, orig_to=<[^[:space:]]+@tardis.ed.ac.uk>, relay=none, delay=[0-9]+, status=deferred \(delivery temporarily suspended: host [^[:space:]]+.mac.com\[[0-9.]+\] refused to talk to me: 452 try later\)$
