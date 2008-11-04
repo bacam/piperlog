@@ -2,17 +2,20 @@
 
 set -e
 
-logcheckdir=/etc/logcheck
+declare -a logcheckdirs
 level=""
 while getopts 'd:f:l:' opt
 do case $opt in
-   d) logcheckdir="$OPTARG";;
+   d) logcheckdirs+=("$OPTARG");;
    f) discard="$OPTARG";;
    l) level="$OPTARG";;
    ?) echo "Usage: piperlog-mkignore [-d <logcheck directory>] [ -f <discard file>]\n       [-l <level>]"
       exit 1;;
    esac
 done
+if [ ${#logcheckdirs[*]} -eq 0 ]; then
+  logcheckdirs[0]=/etc/logcheck
+fi
 if [ -z "$level" ]; then
   if [ -f "$logcheckdir/logcheck.conf" ]; then
     level=$(source "$logcheckdir/logcheck.conf" && echo $REPORTLEVEL)
@@ -34,7 +37,9 @@ case "$level" in
     exit 1
     ;;
 esac
-(cd "$logcheckdir"; find $paths -type f | xargs cat) \
+for (( i=0 ; $i < ${#logcheckdirs[*]} ; i++ )); do \
+  (cd "$logcheckdir"; find $paths -type f | xargs cat); \
+done \
  | if [ -z "$discard" ]; then
      piperlog-convert
    else
