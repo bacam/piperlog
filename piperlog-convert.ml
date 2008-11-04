@@ -29,7 +29,9 @@ let cut line =
 try
 while true do
   let l = read_line () in
-  if Pcre.pmatch ~rex:commentary l then () else
+  if Pcre.pmatch ~rex:commentary l then
+    print_endline l
+  else
   match cut l with
     Some cutline ->
       if Hashtbl.mem discard cutline
