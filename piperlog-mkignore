@@ -38,7 +38,7 @@ case "$level" in
     ;;
 esac
 for (( i=0 ; $i < ${#logcheckdirs[*]} ; i++ )); do \
-  (cd "${logcheckdirs[$i]}"; find $paths -type f | xargs cat); \
+  (echo "# -- Source: ${logcheckdirs[$i]}"; cd "${logcheckdirs[$i]}"; find $paths -type f | xargs cat); \
 done \
  | if [ -z "$discard" ]; then
      piperlog-convert
