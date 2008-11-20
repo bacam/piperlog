@@ -39,3 +39,9 @@
 
 # One of our users forwards onto mac.com, but they make you wait a lot.
 ^postfix/qmgr\[[0-9]+\]: [[:alnum:]]+: to=<[^[:space:]]+@mac.com>, orig_to=<[^[:space:]]+@tardis.ed.ac.uk>, relay=none, delay=[0-9]+, status=deferred \(delivery temporarily suspended: host [^[:space:]]+.mac.com\[[0-9.]+\] refused to talk to me: 452 try later\)$
+
+# The unix pam failures aren't interesting - users are in ldap
+^dovecot-auth: \(pam_unix\) authentication failure; logname= uid=0 euid=0 tty=dovecot ruser= rhost=[0-9.]+  user=
+
+# Google love plaintext, silly buggers
+^dovecot: pop3-login: Login failed: Plaintext authentication disabled: 
