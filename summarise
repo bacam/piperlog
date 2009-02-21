@@ -24,7 +24,15 @@
 
 ^postfix/smtpd\[[0-9]+\]: warning: [0-9.]+.(\S+): RBL lookup error: Host or domain name not found. Name service error for name=\S+ type=(.*)$
 
+^postfix/qmgr\[[0-9]+\]: [0-9A-Z]+: to=([^[:space:]]+), orig_to=([^[:space:]]+), relay=none, delay=[0-9.]+, delays=[0-9/.]+, dsn=[0-9.]+, status=deferred \(delivery temporarily suspended: host [^ ]+ refused to talk to me:
+
 ^exim\[[0-9]+\]: [0-9-]+ [0-9:]+ Cannot open main log file "([^"]+)": (.*)$
+
+# Some bind messages that started appearing with lenny.
+# The first appears to be related to ddos attacks that are not easy to prevent
+^named\[[0-9]+\]: client ([0-9.]+)#[0-9]+: query \(cache\) '\./NS/IN' denied$
+# The second is probably just broken nameservers, but maybe we should check
+^named\[[0-9]+\]: too many timeouts resolving ('[^']+') \(in ('[^']+')\?\): disabling EDNS$
 
 # Generic summarisation -- ignores pid.
 ^([^[: ]+)\[[0-9]+\]:(.*)$
