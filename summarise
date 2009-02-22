@@ -28,11 +28,13 @@
 
 ^exim\[[0-9]+\]: [0-9-]+ [0-9:]+ Cannot open main log file "([^"]+)": (.*)$
 
-# Some bind messages that started appearing with lenny.
+# Some bind messages that started appearing with lenny, maybe we should ignore them
 # The first appears to be related to ddos attacks that are not easy to prevent
 ^named\[[0-9]+\]: client ([0-9.]+)#[0-9]+: query \(cache\) '\./NS/IN' denied$
 # The second is probably just broken nameservers, but maybe we should check
 ^named\[[0-9]+\]: too many timeouts resolving ('[^']+') \(in ('[^']+')\?\): disabling EDNS$
+# Another EDNS one I don't know what to do with
+^named\[[0-9]+\]: too many timeouts resolving '[^']+' \(in '[^']+'\?\): reducing the advertised EDNS UDP packet size to 512 octets$
 
 # Generic summarisation -- ignores pid.
 ^([^[: ]+)\[[0-9]+\]:(.*)$
