@@ -2,6 +2,12 @@ let extracrap = List.map (fun s -> (String.length s, s))
  ["^\\w{3} [ :0-9]{11} [._[:alnum:]-]+ ";
   "^\\w{3} [ :[:digit:]]{11} [._[:alnum:]-]+ "];;
 let commentary = Pcre.regexp "^\\s*(#.*)?$"
+(* Patterns like [:[:digit:]] with a leading : in the class appear to be
+   forbidden in current versions of pcre.  (I'm not sure that they should be,
+   though...) *)
+let badclass = Pcre.regexp "\\[:([^\\]]*)\\[:([a-z]*):\\]"
+let badclass' = Pcre.subst "[[:$2:]:$1"
+
 let discard = Hashtbl.create 20;;
 
 let discardname = ref "/etc/piperlog/discard" in
@@ -36,7 +42,9 @@ while true do
     Some cutline ->
       if Hashtbl.mem discard cutline
       then print_endline ("# discarded: " ^ cutline)
-      else print_endline cutline
+      else 
+	let newline = Pcre.replace ~rex:badclass ~itempl:badclass' cutline in
+	  print_endline newline
   | None ->
       (prerr_string "Dodgy: "; prerr_endline l)
 done
