@@ -45,3 +45,10 @@
 
 # Google love plaintext, silly buggers
 ^dovecot: pop3-login: Login failed: Plaintext authentication disabled: 
+
+# Replacement for dodgy pattern
+^named\[[0-9]+\]: lame server resolving '[^[:space:]]+' \(in '[^[:space:]]+'\?\): [0-9.]+#[0-9]+$
+
+# Refined version of an existing rule
+^postgrey(\[[0-9]+\])?:( [0-9A-F]+:)? action=.+, reason=.+,( delay=.+,)?( client_name=.+,)? client_address=.+,( sender=.*,)? recipient=.+
+

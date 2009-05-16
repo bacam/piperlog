@@ -35,3 +35,5 @@
 # Some dodgy regular expressions;  I don't use dspam, so just remove them
 ^dspam\[[0-9]+\]: spam detected from [.0-9]+{7,15}$
 ^dspam\[[0-9]+\]: innocent message from [.0-9]+{7,15}$
+# Dodgy pattern, replaced by one in extra
+^named\[[0-9]+\]: lame server resolving '[^[:space:]]+' \(in '[^[:space:]]+'\?\): [.0-9.]+#[0-9]+$
