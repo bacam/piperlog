@@ -35,11 +35,6 @@
 ^named\[[0-9]+\]: too many timeouts resolving '[^']+' \(in ('[^']+')\?\): disabling EDNS$
 # Another EDNS one I don't know what to do with
 ^named\[[0-9]+\]: too many timeouts resolving '[^']+' \(in '[^']+'\?\): reducing the advertised EDNS UDP packet size to 512 octets$
-^named\[[0-9]+\]: connection refused resolving '[^']+': ([0-9.#]+)$
-
-# Get this a lot from IPv6, ought to check if it's causing problems
-^named\[[0-9]+\]: network unreachable resolving '[^']+': 
-
 
 # Generic summarisation -- ignores pid.
 ^([^[: ]+)\[[0-9]+\]:(.*)$
