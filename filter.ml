@@ -107,7 +107,7 @@ let filter ignorable outbuffer summaries s =
 let readregexps filename =
   let addregexp a l =
     try (Pcre.regexp l)::a
-    with Pcre.BadPattern (msg,pos) ->
+    with Pcre.Error (Pcre.BadPattern (msg,pos)) ->
       Printf.eprintf "Bad regexp: %s at position %d\n  %s\n%!" msg pos l;
       a
   in
@@ -124,7 +124,7 @@ let mkignore filename =
       try (Pcre.extract ~rex:grabservice ~full_match:false l).(0)
       with Not_found -> ""
     in try (Hashtbl.add a service (Pcre.regexp l); a)
-       with Pcre.BadPattern (msg,pos) ->
+       with Pcre.Error (Pcre.BadPattern (msg,pos)) ->
          Printf.eprintf "Bad regexp: %s at position %d\n  %s\n%!" msg pos l;
          a
   in File.foldfile filename insert (Hashtbl.create 650)
