@@ -25,12 +25,12 @@ piperlog.bc: file.cmo filter.cmo
 piperlog: file.cmx filter.cmx
 	ocamlopt -I +pcre -o $@ pcre.cmxa $^
 
-piperlog-convert.bc: file.cmo piperlog-convert.cmo
+piperlog-convert.bc: file.cmo piperlogconvert.cmo
 	ocamlc -g -I +pcre -o $@ pcre.cma $^
-piperlog-convert: file.cmx piperlog-convert.cmx
+piperlog-convert: file.cmx piperlogconvert.cmx
 	ocamlopt -I +pcre -o $@ pcre.cmxa $^
 
-depends: file.ml filter.ml piperlog-convert.ml
+depends: file.ml filter.ml piperlogconvert.ml
 	ocamldep $^ > $@
 
 include depends
