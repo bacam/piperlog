@@ -18,7 +18,7 @@ generate the summaries.
   Creating home directory `/home/piperlog'.
   piper:~# logmerge-mkoffsets /var/log/auth.log /var/log/syslog > /var/lib/logmerge/offsets
   piper:~# chown -R piperlog.adm /var/lib/logmerge/
-  piper:~# crontab -e -u piperlog/etc/piperlog/ignore
+  piper:~# crontab -e -u piperlog /etc/piperlog/ignore
 
   5 */4 * * * (REPLYTO=sysmans@example.com; export REPLYTO; logmerge | piperlog | mail -s "some.example.com log summary at `date`" mrlogreader@example.com)
 
