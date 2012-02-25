@@ -1,3 +1,9 @@
+piperlog (0.7) unstable; urgency=low
+
+  * Collected updates from the last few years.
+
+ -- Brian Campbell <bacam@tardis.ed.ac.uk>  Sat, 25 Feb 2012 14:34:15 +0000
+
 piperlog (0.6) unstable; urgency=low
 
   * Handle an alternative form of pattern from logcheck files.
